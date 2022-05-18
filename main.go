@@ -9,13 +9,18 @@ import (
 	"time"
 )
 
-const testfilePath = "tmp/testfile"
+const (
+	testfilePath = "tmp/testfile"
+	interval     = 30 * time.Second
+)
 
 func main() {
+	fmt.Printf("Starting up, please wait %s for the first test...\n", interval.String())
+
 	sigs := make(chan os.Signal)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
-	ticker := time.NewTicker(30 * time.Second)
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
 	for {
@@ -43,7 +48,7 @@ func main() {
 				fmt.Printf("error running df: %v\n", err)
 				continue
 			}
-			fmt.Println(out)
+			fmt.Println(string(out))
 		}
 	}
 }

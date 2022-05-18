@@ -10,6 +10,6 @@ RUN mkdir -p /app/tmp && \
 WORKDIR /app
 
 # TODO: Uncomment later and see if it makes a difference
-# VOLUME /app/tmp
+VOLUME /app/tmp
 
 ENTRYPOINT [ "/app/app" ]
